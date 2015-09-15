@@ -1,0 +1,21 @@
+
+	<table class="table">
+	<thead>
+		<tr>
+			<th>Url</th>
+			<th>Likes</th>
+			<th>Dislikes</th>
+			<th>Shares</th>
+			<th>Tags</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in gifs">
+			<td> {{ item.url }} </td>
+			<td> {{ item.likes }} </td>
+			<td> {{ item.dislikes }} </td>
+			<td> {{ item.shares }} </td>
+			<td> {{ item.tags }} </td>
+		</tr>
+	</tbody>		
+	</table>
