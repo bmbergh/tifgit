@@ -1,42 +1,48 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="gifApp">
 	<head>
 		<meta charset ="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>Tif Gif</title>
 		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, intial-scaleable">
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Roboto|Voltaire' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="public/css/main.css">
+
 	</head>
 	<body>
-		<div class="container" ng-controller="AppCtrl">
-			<h1>Lets get funky</h1>
-			<li>
-			</li>
+		<div class="container">
+				
+				<h1>Add Gif</h1>
+
+				<form method="POST" action="/gifs" ng-submit="onCreate()">
+					<input name="url" type="text" placeholder="URL" ng-model="gif.url"/>
+					<input name="likes" type="number" placeholder="likes" ng-model="gif.likes"/>
+					<input name="dislikes" type="number" placeholder="Dislikes" ng-model="gif.dislikes"/>
+					<input name="shares" type="number" placeholder="Share" ng-model="gif.shares" />
+					<input name="tags" type="string" placeholder="Comma Separated List Of Tags" ng-model="gif.tags" />
+					<button type="submit">Send</button>
+				</form>
+
+				<div ng-controller="gifCtrl">
+					<button ng-click="search('cat')">Get Dem Cats Yo</button>	
+				
+				<div ng-repeat="gif in gifs">
+					<div>
+						<img src="{{gif.url}}">
+						<button ng-click="likeGif(gif._id)">Like</button>
+						<button ng-click="dislikeGif(gif._id)">Dislike</button>
+					</div>
+				</div>
+
+				</div>
+           
 		</div>
-
-		<form method="POST" action="/send">
-			<input name="senderName" type="text" placeholder="Your Name" />
-			<input name="recipientEmail" type="text" placeholder="Send To Email" />
-			<button type="submit">Send</button>
-		</form>
-
-		<h1>Add Gif</h1>
-		<form method="POST" action="/gifs" ng-submit="onCreate()">
-			<input name="url" type="text" placeholder="URL" ng-model="gif.url"/>
-			<input name="likes" type="number" placeholder="likes" ng-model="gif.likes"/>
-			<input name="dislikes" type="number" placeholder="Dislikes" ng-model="gif.dislikes"/>
-			<input name="shares" type="number" placeholder="Share" ng-model="gif.shares" />
-			<input name="tags" type="string" placeholder="Comma Separated List Of Tags" ng-model="gif.tags" />
-			<button type="submit">Send</button>
-		</form>
-		<form method="POST" action="/gifs/like">
-			<button>Like</button>
-		</form>
-		<form method="POST" action="/gifs/dislike">
-			<button>Dislike</button>
-		</form>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 		
-		<script src="controllers/controller.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
+		<script type="text/javascript" src="static/js/app.js"></script>
+		
 	</body>
 </html>

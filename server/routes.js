@@ -11,6 +11,7 @@ module.exports = function () {
 	//get request to out ROOT dir fetch index.html
 	router.get('/', function(req, res){
 		res.sendfile(path.normalize(__dirname + '/../client/views/index.html'));
+		console.log("hello world");
 	});
 
 	router.get('/gifs', function(req, res){
@@ -20,10 +21,11 @@ module.exports = function () {
 	//Email Routes
 	router.post('/send', email.send);
 
-	//User Routes
+	//Gifs Routes
+	router.get('/gifs/search', gifs.search);
 	router.post('/gifs', gifs.create);
-	router.post('/gifs/like', gifs.like);
-	router.post('/gifs/dislike', gifs.dislike);
+	router.put('/gifs/like', gifs.like);
+	router.put('/gifs/dislike', gifs.dislike);
 
 
 	return router;
