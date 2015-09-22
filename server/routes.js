@@ -19,14 +19,23 @@ module.exports = function () {
 	});
 
 	//Email Routes
-	router.post('/send', email.send);
+	router.put('/share', email.send);
 
 	//Gifs Routes
 	router.get('/gifs/search', gifs.search);
-	router.post('/gifs', gifs.create);
-	router.put('/gifs/like', gifs.like);
-	router.put('/gifs/dislike', gifs.dislike);
+	router.get('/gifs/random', gifs.random);
 
+	router.post('/gifs', gifs.create);
+
+	/**
+	 * :id can be accessed in the controller with req.param.id
+	 * :id represents the value that was passed in by the client in that section of the url.
+	 * 
+	 * Client Url: "/gifs/123/like"
+	 * req.params.id would equal 123
+	 */
+	router.put('/gifs/:id/like', gifs.like);
+	router.put('/gifs/:id/dislike', gifs.dislike);
 
 	return router;
 };

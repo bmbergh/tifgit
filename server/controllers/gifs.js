@@ -17,7 +17,6 @@ exports.create = function (req, res, next) {
 	var body = req.body;
 	body.tags = body.tags.split(',');
 
-
 	gif.create(body, function (error, data) {
 		debug(error, data);
 
@@ -28,9 +27,9 @@ exports.create = function (req, res, next) {
 }
 
 exports.like = function (req, res){
-
-	var query = { _id: '55f637adfb89ae4e186692eb'};
-	gif.findOneAndUpdate(query, {$inc: {likes: 1}}, function (error, data){
+	debug(req.params.id);
+	var query = { _id: req.params.id}
+	gif.findOneAndUpdate(query, {$inc: {likes: 1}}, {new: true}, function (error, data){
 		debug(error, data);
 
 		if(error) return res.status(500).json(error);
@@ -40,12 +39,18 @@ exports.like = function (req, res){
 }
 
 exports.dislike = function(req, res){
-	var query = {_id: '55f637adfb89ae4e186692eb' };
-	gif.findOneAndUpdate(query, {$inc: {dislikes: 1}}, function (error, data){
+	/**
+	 * req.params.id represents a paramter the url
+	 */
+	var query = {_id: req.params.id}
+	gif.findOneAndUpdate(query, {$inc: {dislikes: 1}}, {new: true}, function (error, data){
 		debug(error, data);
 
 		if(error) return res.status(500).json(error);
 		return res.status(200).json(data);
+
+		//gif.find({dislikes: {$gte: 3}}).remove(callback);
+		//gif.findOneAndRemove(query, {dislikes: {$gte: 3}})
 	});
 }
 
@@ -79,8 +84,58 @@ exports.search = function (req, res){
 			})
 
 		});
-	});																									
+	})																									
 }
+
+exports.random = function(req, res){
+	var list = [];
+	gif.find({}, function(error, data){
+
+		if (error) return res.status(500).json(error);
+
+		for (var i = 0; i < 20; i++) {
+
+			var random = Math.random() * 10;
+			var index = Math.floor(random) > data.length ? 
+				data.length - 1 : Math.floor(random);
+
+			console.log('random: ', index, data.length, data[index]);
+
+			var item = data.splice(index, 1);
+
+			console.log('random item: ', item, data[index]);
+
+			list.push(data.splice(index, 1)[0]);
+		}
+
+		return res.status(200).json(list);
+	});
+}
+
+// exports.game = function (req, res){
+// 	gifs.find({}, function (err, gifs){
+
+// 		users.find({ip: req.ip}, function(err, u){
+
+// 		var voted_on = [];
+
+// 		if(u.length == 1){
+// 			voted_on = u[0].votes;
+// 		}
+
+// 		var not_viewed = gifs.filter(function(gif){
+// 			return voted_on.indexOf(gif._id) == -1;
+// 		});
+// 		var image_shown = null;
+// 		if (not_viewed.length > 0){
+// 			image_shown = not_viewed[Math.floor(Math.random()*not_viewed.length)]
+// 		}
+// 		res.render('./', { gif: image_shown });
+// 		if(error) return res.status(500).json(error);
+// 		return res.status(200).json(data);
+// 	})
+// })
+// }
 
 /*
  * Description: Format the gif objects
@@ -95,7 +150,7 @@ function formatGifObjects(giphyObjects) {
 		dislikes: 0,
 		likes: 0,
 		shares:0,
-		tags: ['cat'],
+		tags: [],
 		deleted: false
       
     };

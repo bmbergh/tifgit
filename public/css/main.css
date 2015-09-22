@@ -1,3 +1,106 @@
+.gameImages{
+  display: none;
+}
+
+#logo {
+  text-align: center;
+  z-index: 1; }
+
+.logoSvg {
+  width: 40%;
+  height: 100px;
+  margin: 5% 0 0 0; }
+
 body {
-  background-color: #ccc;
-  font-family: 'Roboto', sans-serif; }
+  background-color: #FCFCFC;
+  position: relative; }
+
+button {
+  border: none;
+  background-color: none;
+  background: transparent;
+  font-style: normal; }
+
+.row {
+  text-align: center;
+  margin: 5% 0 5% 0;
+  width: 100%;
+  z-index: 100; }
+
+img {
+  width: 360px;
+  height: 350px;
+  margin: 2%;
+  text-align: center; }
+
+#likebtn svg {
+  z-index: 50;
+  margin: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: transparent; }
+
+#likebtn svg:hover {
+  fill: #BFFF00; }
+
+#dislikeBtn {
+  background-color: none;
+  position: absolute;
+  margin: 30px 0 0 -40px; }
+
+.btn-default {
+  background: transparent;
+  text-shadow: none;
+  margin: 0  3%;
+  padding: 1%;
+  /*-webkit-transform:skewX(-30deg); */ }
+
+.btn-default:nth-child(1) {
+  border: #01BAEF 1px solid;
+  color: #01BAEF; }
+
+.btn-default:nth-child(1):hover {
+  background-color: #01BAEF;
+  color: #FCFCFC; }
+
+.btn-default:nth-child(2) {
+  border: #26547C 1px solid;
+  color: #26547C; }
+
+.btn-default:nth-child(2):hover {
+  background-color: #26547C;
+  color: #FCFCFC; }
+
+.btn-default:nth-child(3) {
+  border: #06D6A0 1px solid;
+  color: #06D6A0; }
+
+.btn-default:nth-child(3):hover {
+  background-color: #06D6A0;
+  color: #FCFCFC; }
+
+.btn-default:nth-child(4) {
+  border: #FFD166 1px solid;
+  color: #FFD166; }
+
+.btn-default:nth-child(4):hover {
+  background-color: #FFD166;
+  color: #FCFCFC; }
+
+.btn-default:nth-child(5) {
+  border: #EF476F 1px solid;
+  color: #EF476F; }
+
+.btn-default:nth-child(5):hover {
+  background-color: #EF476F;
+  color: #FCFCFC; }
+
+@media (max-width: 400px) {
+  .btn-default {
+    display: block;
+    margin: 5% auto;
+    padding: 2%; }
+
+  .addGifForm {
+    display: none; } }

@@ -6,9 +6,12 @@
   },
   "dependencies": {
     "angular": "^1.4.5",
+    "angular-animate": "^1.4.6",
+    "angular-ui-bootstrap": "^0.13.4",
     "body-parser": "^1.13.3",
     "bootstrap": "^3.3.5",
     "express": "^4.13.3",
+    "mandrill-api": "^1.0.45",
     "mongoose": "^4.1.6",
     "morgan": "^1.6.1",
     "request": "^2.62.0"
