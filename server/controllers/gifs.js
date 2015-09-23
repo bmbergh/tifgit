@@ -42,22 +42,23 @@ exports.dislike = function(req, res){
 	/**
 	 * req.params.id represents a paramter the url
 	 */
-	var query = {_id: req.params.id}
-	gif.findOneAndUpdate(query, {$inc: {dislikes: 1}}, {new: true}, function (error, data){
-		debug(error, data);
-
+	gif.findById(req.params.id, function (error, data){
 		if(error) return res.status(500).json(error);
-		return res.status(200).json(data);
+		
+		var updateObj = {$inc: {dislikes: 1, likes:1}};
+		if(data.dislikes++ == 3) updateObj.deleted = true;
 
-		//gif.find({dislikes: {$gte: 3}}).remove(callback);
-		//gif.findOneAndRemove(query, {dislikes: {$gte: 3}})
+		gif.findByIdAndUpdate(req.params.id, updateObj, {new:true}, function (error, data){
+			if(error) return res.status(500).json(error);
+			return res.status(200).json(data);
+		});
 	});
 }
 
 exports.search = function (req, res){
 	debug(req.query);
 
-	var query = {tags: req.query.tag};
+	var query = {tags: req.query.tag, delete: false};
 	gif.find(query, function (error, data){
 		debug(error, data);
 
@@ -111,31 +112,6 @@ exports.random = function(req, res){
 		return res.status(200).json(list);
 	});
 }
-
-// exports.game = function (req, res){
-// 	gifs.find({}, function (err, gifs){
-
-// 		users.find({ip: req.ip}, function(err, u){
-
-// 		var voted_on = [];
-
-// 		if(u.length == 1){
-// 			voted_on = u[0].votes;
-// 		}
-
-// 		var not_viewed = gifs.filter(function(gif){
-// 			return voted_on.indexOf(gif._id) == -1;
-// 		});
-// 		var image_shown = null;
-// 		if (not_viewed.length > 0){
-// 			image_shown = not_viewed[Math.floor(Math.random()*not_viewed.length)]
-// 		}
-// 		res.render('./', { gif: image_shown });
-// 		if(error) return res.status(500).json(error);
-// 		return res.status(200).json(data);
-// 	})
-// })
-// }
 
 /*
  * Description: Format the gif objects

@@ -13,7 +13,7 @@ exports.send = function(req, res){
         "from_name": null,
         "to": [],
         "headers": {
-            "Reply-To": "jdpagley@gmail.com"
+            "Reply-To": null,
         },
         "important": false,
         "track_opens": null,

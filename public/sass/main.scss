@@ -3,10 +3,12 @@
 	z-index: 1;
 }
 .logoSvg{
-	width:40%;
-	height:100px;
+	width:50%;
+	height:150px;
 	margin: 5% 0 0 0;
-	
+}
+.logoSvg svg{
+	fill:#37474f;
 }
 body{
 	background-color: #FCFCFC;
@@ -30,7 +32,13 @@ img{
 	margin: 2%;
 	text-align: center;
 }
-
+/*======================MODAL=======================*/
+#modal-body{
+	background-color: transparent;
+}
+.btn-warning{
+	background-color: transparent;
+}
 #likebtn svg{
 	z-index: 50;
 	margin:100px;
@@ -55,15 +63,84 @@ img{
 	/*-webkit-transform:skewX(-30deg); */
 }
 
-.btn-default:nth-child(1){
+.btn-default{
+  float: left;
+  min-width: 150px;
+  max-width: 250px;
+  display: block;
+  margin: 1em;
+  padding: 1em 2em;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 3px solid #37474f;
+  color: #37474f;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  
+  &::before {
+    background: none repeat scroll 0 0 #37474f;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+              -webkit-transition-delay: 0s, 0s;
+           -webkit-transition-duration: 0.4s, 0.4s;
+           -webkit-transition-property: transform, opacity;
+    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    width: 100%;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #fff;
+    
+    &::before {
+      opacity: 1;
+    }
+  }
+  
+  &.split {
+    &:hover {
+      &::before {
+        -webkit-transform: translate3d(0px, 0px, 0px);
+      }
+    }
+    
+    &::before {
+      -webkit-transform: scale3d(0.7, 1, 1);
+    }
+  }
+   &.wayra {
+    &:hover {
+      &::before {
+        -webkit-transform: rotate3d(0, 0, 1, 0deg);
+      }
+    }
+    
+    &::before {
+      -webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0px, -3em, 0px);
+    }
+  }
+}
+
+
+
+/*.btn-default:nth-child(1){
 	border:#01BAEF 1px solid;
 	color:#01BAEF;
 }
 .btn-default:nth-child(1):hover{
 	background-color:#01BAEF;
 	color:#FCFCFC;
-}
-.btn-default:nth-child(2){
+}*/
+/*.btn-default:nth-child(2){
 	border:#26547C 1px solid;
 	color:#26547C;
 }
@@ -94,16 +171,20 @@ img{
 .btn-default:nth-child(5):hover{
 	background-color:#EF476F;
 	color:#FCFCFC;
-}
+}*/
 
 @media (max-width: 400px){
 	.btn-default{
 		display: block;
-		margin:5% auto;
-		padding:2%;
+		margin: 2% 10%;
 	}
 	.addGifForm{
 		display:none;
+	}
+
+	.logoSvg{
+		width:60%;
+		height:140px;
 	}
 }
 

@@ -15,10 +15,17 @@ angular.module("gifApp", ["ngRoute", "ui.bootstrap", "ngAnimate"])
 
 
 	.controller('gifCtrl', ['$scope', '$http', function ($scope, $http){
-
-	  	$scope.message = "I see gifs";
+		$scope.message = "I see gifs";
 	  	$scope.gifs = [];
-
+		window.onload = function (){
+			$http.get('/gifs/search?tag=fail').then(function (response){
+				$scope.gifs=response.data;
+				console.log("Welcome tags loaded", response);
+			}, function (response){
+				console.log('Error on welcome load', response);
+			})
+		}
+	  	
   		$scope.search = function(tag) {
 
     		$http.get('/gifs/search?tag='+tag).then(function (response) {
@@ -31,23 +38,6 @@ angular.module("gifApp", ["ngRoute", "ui.bootstrap", "ngAnimate"])
   			});
 		};
 
-		$scope.likeGif = function(id){
-			$http.put('/gifs/'+id+'/like').then(function (response){
-				console.log('Success on Like ' , response);
-			}, function (response){
-				console.log('Error on like:', response);
-			});
-		};
-
-		$scope.dislikeGif = function(id){
-			$http.put('/gifs/'+id+'/dislike').then(function (response){
-				console.log('Success on Dislike ', response);
-			}, function (response){
-				console.log('Error on dislike', response);
-		
-			});
-		};
-
 	}])
 	
 .controller('ModalCtrl', function ($scope, $modal, $log, $http) {
@@ -56,6 +46,8 @@ angular.module("gifApp", ["ngRoute", "ui.bootstrap", "ngAnimate"])
 
   $scope.openShare = function (size, id, url) {
 
+  	console.log("I clicked the modal");
+
     var modalInstance = $modal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'shareModalContent.html',
@@ -63,6 +55,7 @@ angular.module("gifApp", ["ngRoute", "ui.bootstrap", "ngAnimate"])
       size: size,
       resolve: {
       	gif: function () {
+      		console.log('resolve:gif: hello');
       		return {
       			id: id,
       			url: url
@@ -72,8 +65,10 @@ angular.module("gifApp", ["ngRoute", "ui.bootstrap", "ngAnimate"])
     });
 
     modalInstance.result.then(function (selectedItem) {
+       console.log('modalInstance resolved');
       $scope.selected = selectedItem;
     }, function () {
+    	console.log('modalInstance Error');
       $log.info('Modal dismissed at: ' + new Date());
     });
 
@@ -116,7 +111,9 @@ angular.module("gifApp", ["ngRoute", "ui.bootstrap", "ngAnimate"])
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-.controller('ShareModalInstanceCtrl', function ($scope, $modalInstance, $http, gif) {
+.controller('shareModalInstanceCtrl', function ($scope, $modalInstance, $http, gif) {
+
+	console.log('shareModalInstanceCtrl has been hit');
 
   $scope.gif = gif;
 
@@ -156,16 +153,25 @@ angular.module("gifApp", ["ngRoute", "ui.bootstrap", "ngAnimate"])
 
 	$scope.activeGif = gifs[activeIndex];
 
-	$scope.like = function () {
-		console.log('Like has been hit', activeIndex, $scope.activeGif);
-		$scope.activeGif = gifs[++activeIndex];
-		console.log('Like has been hit', activeIndex, $scope.activeGif);
+	$scope.like = function (id) {
+		$http.put('/gifs/'+$scope.activeGif._id+'/like').then(function (response){
+			console.log('Success on Like ' , response);
+			$scope.activeGif = gifs[++activeIndex];
+			console.log('Like has been hit', activeIndex, $scope.activeGif);
+		}, function (response){
+			console.log('Error on like:', response);
+		});
 	}
 
-	$scope.dislike = function () {
-		console.log('dislike has been hit', activeIndex);
-		$scope.activeGif = gifs[--activeIndex];
-		console.log('dislike has been hit', activeIndex);
+	$scope.dislike = function (id) {
+		$http.put('/gifs/'+$scope.activeGif._id+'/dislike').then(function (response){
+			console.log('Success on Dislike ', response);
+			$scope.activeGif = gifs[++activeIndex];
+			console.log('dislike has been hit', activeIndex);
+		}, function (response){
+			console.log('Error on dislike', response);
+	
+		});
 	}
 })
 
