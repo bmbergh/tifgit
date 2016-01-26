@@ -1,0 +1,156 @@
+#logo {
+  text-align: center;
+  z-index: 1; }
+
+.logoSvg {
+  width: 50%;
+  height: 150px;
+  margin: 5% 0 0 0; }
+
+.logoSvg svg {
+  fill: #37474f; }
+/*======================MAIN CONTENT=======================*/
+body{
+  background-color: #FCFCFC;
+  position: relative;
+  font-family: 'PT Sans', sans-serif; }
+
+button{
+  border: none;
+  background-color: none;
+  background: transparent;
+  font-style: normal; }
+
+.row {
+  text-align: center;
+  margin: 5% 0 5% 0;
+  width: 100%;
+  z-index: 100; }
+
+img {
+  width: 360px;
+  height: 350px;
+  margin: 2%;
+  text-align: center;
+  box-shadow: 0px 0px 4px 3px #DFE1E7;
+   }
+.panel-footer{
+  padding: 0 0 10% 0;
+}
+
+/*======================MODAL=======================*/
+.modal-content{
+  text-align: center;
+  background-color:transparent;
+  box-shadow: none;
+  border: none;
+  margin:35% 0 0 0;
+}
+.modal-header{
+  background-color: #fff;
+}
+.modal-body{
+  background-color: #fff;
+}
+.modalForm{
+  background-color: #fff;
+}
+.modal-footer{
+  background-color: #fff;
+}
+
+.btn-warning{
+  background-color: #ccc;
+}
+.btn-primary{
+  background-color: #ccc;
+}
+/*======================BUTTONS=======================*/
+#sharebtn svg {
+  z-index: 50;
+  margin: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: transparent; }
+
+#sharebtn svg:hover {
+  fill: #fff;
+ }
+
+#dislikeBtn {
+  background-color: none;
+  position: absolute;
+  margin: 30px 0 0 -40px; }
+
+.btn-default {
+  background: transparent;
+  text-shadow: none;
+  margin: 0  3%;
+  padding: 1%;
+  /*-webkit-transform:skewX(-30deg); */ }
+
+.btn-primary {
+  background-color: none;
+  border: none; }
+
+.btn-warning {
+  background-color: none;
+  border: none; }
+
+.btn-default {
+  float: left;
+  min-width: 150px;
+  max-width: 250px;
+  display: block;
+  margin: 1em;
+  padding: 1em 2em;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 3px solid #37474f;
+  color: #37474f;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif; }
+  .btn-default::before {
+    background: none repeat scroll 0 0 #37474f;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    -webkit-transition-delay: 0s, 0s;
+    -webkit-transition-duration: 0.4s, 0.4s;
+    -webkit-transition-property: transform, opacity;
+    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    width: 100%;
+    z-index: -1; }
+  .btn-default:hover {
+    color: #fff; }
+    .btn-default:hover::before {
+      opacity: 1; }
+  .btn-default.split:hover::before {
+    -webkit-transform: translate3d(0px, 0px, 0px); }
+  .btn-default.split::before {
+    -webkit-transform: scale3d(0.7, 1, 1); }
+  .btn-default.wayra:hover::before {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg); }
+  .btn-default.wayra::before {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0px, -3em, 0px); }
+
+@media (max-width: 400px) {
+  .btn-default {
+    display: block;
+    margin: 2% 10%; }
+
+  .addGifForm {
+    display: none; }
+
+  .logoSvg {
+    width: 60%;
+    height: 140px; } }
